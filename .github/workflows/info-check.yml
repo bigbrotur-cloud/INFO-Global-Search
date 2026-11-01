@@ -1,0 +1,35 @@
+
+name: INFO Website Check
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  website-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Quellcode laden
+        uses: actions/checkout@v4
+
+      - name: Startseite prüfen
+        run: |
+          test -s index.html
+          grep -qi 'INFO' index.html
+          grep -qi 'Deutschland' index.html
+          grep -qi 'Europa' index.html
+          grep -qi 'Global' index.html
+
+      - name: Öffentliche Webseite prüfen
+        run: |
+          curl --fail --location --retry 3 \
+            --max-time 30 \
+            https://bigbrotur-cloud.github.io/INFO-Global-Search/ \
+            -o live.html
+          grep -qi 'INFO' live.html
