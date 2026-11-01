@@ -31,6 +31,18 @@ footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#6
 
 .edu{margin:48px 0 0;text-align:left}.edu h2{font-size:26px;margin-bottom:8px}.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px;margin-top:20px}.edu-item{background:#fff;padding:18px;border:1px solid #dbe3ec;border-radius:15px;text-decoration:none;color:#19314b;display:flex;flex-direction:column;gap:8px}.edu-item:hover{border-color:#ed690c}.edu-item small{color:#52667e;line-height:1.5}.edu-item strong{font-size:17px}
 .consent{position:fixed;z-index:1000;bottom:14px;left:14px;right:14px;max-width:780px;margin:auto;padding:22px;background:white;color:#172941;border:1px solid #bac9d8;border-radius:18px;box-shadow:0 12px 40px #1d335544;text-align:left}.consent h2{margin:0 0 6px}.consent p{margin:7px 0 15px;line-height:1.5}.consent-actions{display:flex;flex-wrap:wrap;gap:9px}.consent-actions button{flex:1;min-width:150px}.consent .secondary{color:#20344b;background:#eef2f7}.consent .secondary:hover{background:#dde6f1}.consent[hidden]{display:none}.consent-options{margin:12px 0;padding:12px;background:#f5f8fc;border-radius:12px}.consent-options label{display:block;margin:7px 0}.consent-options input{width:auto;min-width:0;margin-right:8px}body:has(.consent:not([hidden])){padding-bottom:185px}
+
+/* Alphabet navigation: keep every letter, including Z, within one white surface */
+.az-panel{background:#fff;border:1px solid #dbe3ec;border-radius:16px;padding:12px;margin:24px 0;box-shadow:0 4px 16px #e5eaf055}
+.az-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;text-align:left}
+.az-head h2{margin:0;font-size:18px}
+.settings-gear{display:inline-grid;place-items:center;width:30px;height:30px;min-width:30px;padding:0;border-radius:8px;background:#eef2f7;color:#273b52;font-size:16px;line-height:1}
+.settings-gear:hover{background:#dfe8f2}
+.az-letters{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:5px;width:100%;min-width:0}
+.az-letters a{display:grid;place-items:center;min-width:0;min-height:35px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:750;color:#263d55;background:#f3f6fa}
+.az-letters a:hover,.az-letters a:focus-visible{background:#ffe6d6;color:#a34200}
+@media(max-width:650px){.az-panel{padding:10px}.az-letters{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.az-letters a{min-height:34px;font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -50,6 +62,26 @@ footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#6
 <p class="note">INFO zeigt dir direkte Suchlinks zu Anbietern. Preise und Verfügbarkeit prüfst du auf deren Webseiten.</p>
 <div id="status" role="status" aria-live="polite"></div>
 <div id="results"></div>
+<nav class="az-panel" aria-label="A bis Z Kategorien"><div class="az-head"><h2>Von A bis Z</h2><button type="button" class="settings-gear" id="az-settings" aria-label="Einstellungen öffnen" title="Einstellungen">⚙</button></div><div class="az-letters"><a href="#kategorien" data-letter="A" aria-label="Kategorien mit A anzeigen">A</a><a href="#kategorien" data-letter="B" aria-label="Kategorien mit B anzeigen">B</a><a href="#kategorien" data-letter="C" aria-label="Kategorien mit C anzeigen">C</a><a href="#kategorien" data-letter="D" aria-label="Kategorien mit D anzeigen">D</a><a href="#kategorien" data-letter="E" aria-label="Kategorien mit E anzeigen">E</a><a href="#kategorien" data-letter="F" aria-label="Kategorien mit F anzeigen">F</a><a href="#kategorien" data-letter="G" aria-label="Kategorien mit G anzeigen">G</a><a href="#kategorien" data-letter="H" aria-label="Kategorien mit H anzeigen">H</a><a href="#kategorien" data-letter="I" aria-label="Kategorien mit I anzeigen">I</a><a href="#kategorien" data-letter="J" aria-label="Kategorien mit J anzeigen">J</a><a href="#kategorien" data-letter="K" aria-label="Kategorien mit K anzeigen">K</a><a href="#kategorien" data-letter="L" aria-label="Kategorien mit L anzeigen">L</a><a href="#kategorien" data-letter="M" aria-label="Kategorien mit M anzeigen">M</a><a href="#kategorien" data-letter="N" aria-label="Kategorien mit N anzeigen">N</a><a href="#kategorien" data-letter="O" aria-label="Kategorien mit O anzeigen">O</a><a href="#kategorien" data-letter="P" aria-label="Kategorien mit P anzeigen">P</a><a href="#kategorien" data-letter="Q" aria-label="Kategorien mit Q anzeigen">Q</a><a href="#kategorien" data-letter="R" aria-label="Kategorien mit R anzeigen">R</a><a href="#kategorien" data-letter="S" aria-label="Kategorien mit S anzeigen">S</a><a href="#kategorien" data-letter="T" aria-label="Kategorien mit T anzeigen">T</a><a href="#kategorien" data-letter="U" aria-label="Kategorien mit U anzeigen">U</a><a href="#kategorien" data-letter="V" aria-label="Kategorien mit V anzeigen">V</a><a href="#kategorien" data-letter="W" aria-label="Kategorien mit W anzeigen">W</a><a href="#kategorien" data-letter="X" aria-label="Kategorien mit X anzeigen">X</a><a href="#kategorien" data-letter="Y" aria-label="Kategorien mit Y anzeigen">Y</a><a href="#kategorien" data-letter="Z" aria-label="Kategorien mit Z anzeigen">Z</a></div></nav>
+<section class="edu" id="kategorien" aria-labelledby="categories-title"><h2 id="categories-title">Kategorien von A bis Z</h2><p id="category-hint">Wähle einen Buchstaben, um passende Themen zu entdecken.</p><div class="edu-grid" id="category-grid"><a class="edu-item category-entry" data-initial="A" href="https://www.google.com/search?q=Ausbildung%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Ausbildung</strong><small>Webseiten zum Thema Ausbildung suchen</small></a>
+<a class="edu-item category-entry" data-initial="B" href="https://www.google.com/search?q=Bildung%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Bildung</strong><small>Webseiten zum Thema Bildung suchen</small></a>
+<a class="edu-item category-entry" data-initial="E" href="https://www.google.com/search?q=Einkaufen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Einkaufen</strong><small>Webseiten zum Thema Einkaufen suchen</small></a>
+<a class="edu-item category-entry" data-initial="F" href="https://www.google.com/search?q=Forschung%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Forschung</strong><small>Webseiten zum Thema Forschung suchen</small></a>
+<a class="edu-item category-entry" data-initial="G" href="https://www.google.com/search?q=Gesundheit%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Gesundheit</strong><small>Webseiten zum Thema Gesundheit suchen</small></a>
+<a class="edu-item category-entry" data-initial="H" href="https://www.google.com/search?q=Hochschulen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Hochschulen</strong><small>Webseiten zum Thema Hochschulen suchen</small></a>
+<a class="edu-item category-entry" data-initial="I" href="https://www.google.com/search?q=Internet%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Internet</strong><small>Webseiten zum Thema Internet suchen</small></a>
+<a class="edu-item category-entry" data-initial="K" href="https://www.google.com/search?q=Kinderuniversit%C3%A4t%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Kinderuniversität</strong><small>Webseiten zum Thema Kinderuniversität suchen</small></a>
+<a class="edu-item category-entry" data-initial="L" href="https://www.google.com/search?q=Lernen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Lernen</strong><small>Webseiten zum Thema Lernen suchen</small></a>
+<a class="edu-item category-entry" data-initial="M" href="https://www.google.com/search?q=Medien%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Medien</strong><small>Webseiten zum Thema Medien suchen</small></a>
+<a class="edu-item category-entry" data-initial="P" href="https://www.google.com/search?q=Podcasts%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Podcasts</strong><small>Webseiten zum Thema Podcasts suchen</small></a>
+<a class="edu-item category-entry" data-initial="R" href="https://www.google.com/search?q=Reisen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Reisen</strong><small>Webseiten zum Thema Reisen suchen</small></a>
+<a class="edu-item category-entry" data-initial="S" href="https://www.google.com/search?q=Schulen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Schulen</strong><small>Webseiten zum Thema Schulen suchen</small></a>
+<a class="edu-item category-entry" data-initial="T" href="https://www.google.com/search?q=Technik%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Technik</strong><small>Webseiten zum Thema Technik suchen</small></a>
+<a class="edu-item category-entry" data-initial="U" href="https://www.google.com/search?q=Universit%C3%A4t%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Universität</strong><small>Webseiten zum Thema Universität suchen</small></a>
+<a class="edu-item category-entry" data-initial="V" href="https://www.google.com/search?q=Verbraucher%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Verbraucher</strong><small>Webseiten zum Thema Verbraucher suchen</small></a>
+<a class="edu-item category-entry" data-initial="W" href="https://www.google.com/search?q=Wissenschaft%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Wissenschaft</strong><small>Webseiten zum Thema Wissenschaft suchen</small></a>
+<a class="edu-item category-entry" data-initial="Y" href="https://www.google.com/search?q=YouTube%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>YouTube</strong><small>Webseiten zum Thema YouTube suchen</small></a>
+<a class="edu-item category-entry" data-initial="Z" href="https://www.google.com/search?q=Zeitungen%20seri%C3%B6se%20Webseiten" target="_blank" rel="noopener noreferrer"><strong>Zeitungen</strong><small>Webseiten zum Thema Zeitungen suchen</small></a></div></section>
 
 <section class="edu" aria-labelledby="edu-title"><h2 id="edu-title">Schulen, Universität &amp; Austausch</h2><p>Geprüfte Einstiegspunkte zu offiziellen Informationen. Anträge und Anmeldungen werden direkt bei den zuständigen Einrichtungen ausgefüllt – Demir INFO erfasst dafür keine persönlichen Daten.</p><div class="edu-grid">
 <a class="edu-item" href="https://www.hochschulkompass.de/studium/studiengangsuche.html" target="_blank" rel="noopener noreferrer"><strong>🎓 Studiengänge suchen</strong><small>Hochschulkompass – Hochschulen und Studiengänge in Deutschland</small></a>
@@ -82,6 +114,13 @@ const detail=document.createElement("span");detail.textContent="Suchergebnisse b
 a.append(title,detail);results.append(a);
 }
 }
+document.getElementById("az-settings").addEventListener("click",()=>document.getElementById("cookie-settings").click());
+document.querySelectorAll(".az-letters a").forEach(a=>a.addEventListener("click",()=>{
+const letter=a.dataset.letter;
+const matches=[...document.querySelectorAll(".category-entry")].filter(item=>item.dataset.initial===letter);
+document.querySelectorAll(".category-entry").forEach(item=>{item.hidden=matches.length>0&&item.dataset.initial!==letter;});
+document.getElementById("category-hint").textContent=matches.length?("Themen mit "+letter):("Für "+letter+" sind noch keine Themen hinterlegt. Alle verfügbaren Themen werden angezeigt.");
+}));
 form.addEventListener("submit",event=>{event.preventDefault();search();});
 const params=new URLSearchParams(location.search),initial=params.get("q"),region=params.get("region");
 if(region&&shops[region])scope.value=region;
