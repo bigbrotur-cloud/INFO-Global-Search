@@ -28,6 +28,9 @@ button:hover{background:#cb5705}
 .shop:hover{border-color:#ff791b;transform:translateY(-2px)}.shop strong{font-size:17px}.shop span{font-size:13px;color:#62748a;margin-top:12px}
 footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#62748a;font-size:13px}footer a{color:#984400}
 @media(max-width:650px){.search{grid-template-columns:1fr}.search button{width:100%}header{padding-top:28px}main{padding:12px 15px 38px}}
+
+.edu{margin:48px 0 0;text-align:left}.edu h2{font-size:26px;margin-bottom:8px}.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px;margin-top:20px}.edu-item{background:#fff;padding:18px;border:1px solid #dbe3ec;border-radius:15px;text-decoration:none;color:#19314b;display:flex;flex-direction:column;gap:8px}.edu-item:hover{border-color:#ed690c}.edu-item small{color:#52667e;line-height:1.5}.edu-item strong{font-size:17px}
+.consent{position:fixed;z-index:1000;bottom:14px;left:14px;right:14px;max-width:780px;margin:auto;padding:22px;background:white;color:#172941;border:1px solid #bac9d8;border-radius:18px;box-shadow:0 12px 40px #1d335544;text-align:left}.consent h2{margin:0 0 6px}.consent p{margin:7px 0 15px;line-height:1.5}.consent-actions{display:flex;flex-wrap:wrap;gap:9px}.consent-actions button{flex:1;min-width:150px}.consent .secondary{color:#20344b;background:#eef2f7}.consent .secondary:hover{background:#dde6f1}.consent[hidden]{display:none}.consent-options{margin:12px 0;padding:12px;background:#f5f8fc;border-radius:12px}.consent-options label{display:block;margin:7px 0}.consent-options input{width:auto;min-width:0;margin-right:8px}body:has(.consent:not([hidden])){padding-bottom:185px}
 </style>
 </head>
 <body>
@@ -47,8 +50,18 @@ footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#6
 <p class="note">INFO zeigt dir direkte Suchlinks zu Anbietern. Preise und Verfügbarkeit prüfst du auf deren Webseiten.</p>
 <div id="status" role="status" aria-live="polite"></div>
 <div id="results"></div>
+
+<section class="edu" aria-labelledby="edu-title"><h2 id="edu-title">Schulen, Universität &amp; Austausch</h2><p>Geprüfte Einstiegspunkte zu offiziellen Informationen. Anträge und Anmeldungen werden direkt bei den zuständigen Einrichtungen ausgefüllt – Demir INFO erfasst dafür keine persönlichen Daten.</p><div class="edu-grid">
+<a class="edu-item" href="https://www.hochschulkompass.de/studium/studiengangsuche.html" target="_blank" rel="noopener noreferrer"><strong>🎓 Studiengänge suchen</strong><small>Hochschulkompass – Hochschulen und Studiengänge in Deutschland</small></a>
+<a class="edu-item" href="https://www.daad.de/de/" target="_blank" rel="noopener noreferrer"><strong>🌍 Studieren im Ausland</strong><small>DAAD – Austausch, Stipendien und Auslandsstudium</small></a>
+<a class="edu-item" href="https://erasmus-plus.ec.europa.eu/de/programme-guide/part-b/key-action-1/school-pupils-and-staff" target="_blank" rel="noopener noreferrer"><strong>🏫 Schüleraustausch Erasmus+</strong><small>Offizielle Voraussetzungen, Projektformen und Antragstellung für Schulen</small></a>
+<a class="edu-item" href="https://www.kmk-pad.org/" target="_blank" rel="noopener noreferrer"><strong>🤝 Partnerschulen &amp; Austausch</strong><small>Pädagogischer Austauschdienst der Kultusministerkonferenz</small></a>
+<a class="edu-item" href="https://www.rwth-aachen.de/" target="_blank" rel="noopener noreferrer"><strong>🔬 Kinderuni &amp; Hochschulangebote</strong><small>Einstieg bei der RWTH Aachen – Kinder- und Jugendangebote über die Hochschulseite finden</small></a>
+<a class="edu-item" href="https://www.europass.europa.eu/de" target="_blank" rel="noopener noreferrer"><strong>📄 Europass Unterlagen</strong><small>Europäische Werkzeuge für Lebenslauf, Kompetenzen und Mobilität</small></a>
+</div><p class="note">Hinweis: Die jeweiligen Anbieter können eigene Cookies einsetzen, sobald du deren Seiten öffnest.</p></section>
 </main>
-<footer>Demir INFO · Bit to Qubit · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>
+<footer>Demir INFO · Bit to Qubit · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="#" id="cookie-settings">Cookie-Einstellungen</a></footer>
+<section class="consent" id="cookie-consent" role="dialog" aria-modal="false" aria-labelledby="cookie-heading" hidden><h2 id="cookie-heading">Deine Privatsphäre</h2><p>Diese Webseite benötigt keine Tracking-Cookies. Wenn du zustimmst, speichern wir lediglich deine Auswahl für zukünftige Besuche auf diesem Gerät. Ohne Zustimmung speichern wir keine Cookie-Einstellung dauerhaft.</p><div class="consent-options" id="consent-options" hidden><label><input type="checkbox" checked disabled> Notwendige Funktionen (immer aktiv)</label><label><input type="checkbox" id="remember-choice"> Auswahl auf diesem Gerät speichern (optional)</label></div><div class="consent-actions"><button type="button" class="secondary" id="reject-cookies">Nur notwendige</button><button type="button" class="secondary" id="manage-cookies">Einstellungen</button><button type="button" id="accept-cookies">Alle akzeptieren</button><button type="button" id="save-cookies" hidden>Auswahl speichern</button></div></section>
 <script>
 "use strict";
 const shops={
@@ -73,6 +86,17 @@ form.addEventListener("submit",event=>{event.preventDefault();search();});
 const params=new URLSearchParams(location.search),initial=params.get("q"),region=params.get("region");
 if(region&&shops[region])scope.value=region;
 if(initial){query.value=initial.slice(0,200);search();}
+
+const consent=document.getElementById("cookie-consent"),options=document.getElementById("consent-options"),remember=document.getElementById("remember-choice"),save=document.getElementById("save-cookies");
+function showConsent(){options.hidden=true;save.hidden=true;document.getElementById("accept-cookies").hidden=false;consent.hidden=false;}
+function storeConsent(allowed){try{if(allowed)localStorage.setItem("demir-info-consent-v1","preference-only");else localStorage.removeItem("demir-info-consent-v1");}catch(e){}consent.hidden=true;}
+let existingConsent=false;try{existingConsent=localStorage.getItem("demir-info-consent-v1")==="preference-only";}catch(e){}
+if(!existingConsent)showConsent();
+document.getElementById("reject-cookies").addEventListener("click",()=>storeConsent(false));
+document.getElementById("accept-cookies").addEventListener("click",()=>storeConsent(true));
+document.getElementById("manage-cookies").addEventListener("click",()=>{options.hidden=false;save.hidden=false;document.getElementById("accept-cookies").hidden=true;});
+save.addEventListener("click",()=>storeConsent(remember.checked));
+document.getElementById("cookie-settings").addEventListener("click",event=>{event.preventDefault();showConsent();});
 </script>
 </body>
 </html>
