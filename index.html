@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INFO – Dein Kompass fürs Internet</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f8fc;color:#192b43}
+header{padding:24px;text-align:center}
+.logo{font-size:64px;font-weight:900;color:#ff791b;letter-spacing:-4px}
+h1{font-size:27px;margin:25px 0 8px}
+p{color:#617088}
+main{max-width:850px;margin:auto;padding:20px;text-align:center}
+.search{display:flex;flex-wrap:wrap;gap:9px;background:white;border:1px solid #dae1eb;border-radius:18px;padding:12px;box-shadow:0 8px 30px #dbe3ee}
+input{flex:1;min-width:160px;padding:15px;border:0;font-size:17px;outline:none}
+select{padding:12px;border:1px solid #ddd;border-radius:10px;background:#fff}
+button{background:#ff791b;color:white;border:0;border-radius:10px;padding:14px 23px;font-size:17px;font-weight:bold;cursor:pointer}
+#results{text-align:left;margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:13px}
+.shop{display:block;text-decoration:none;color:#18344d;background:white;padding:20px;border:1px solid #e1e7ee;border-radius:14px;box-shadow:0 4px 12px #e5e9ef}
+.shop:hover{border-color:#ff791b}
+small{display:block;color:#68798b;margin-top:9px}
+footer{text-align:center;margin-top:50px;color:#758393;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="logo">INFO</div></header>
+<main>
+<h1>Dein Kompass fürs Internet</h1>
+<p>Weniger suchen, mehr finden.</p>
+<form class="search" id="form">
+<input id="query" placeholder="Was suchst du?" required>
+<select id="scope" aria-label="Suchbereich">
+<option value="de">Deutschland</option>
+<option value="eu">Europa</option>
+<option value="global">Global</option>
+</select>
+<button type="submit">Suchen</button>
+</form>
+<div id="results"></div>
+</main>
+<footer>INFO – Bit to Qubit</footer>
+<script>
+const shops={
+de:[
+["Google Shopping","https://www.google.com/search?tbm=shop&q="],
+["Amazon Deutschland","https://www.amazon.de/s?k="],
+["eBay Deutschland","https://www.ebay.de/sch/i.html?_nkw="],
+["Idealo","https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q="],
+["Kaufland","https://www.kaufland.de/s/?search_value="],
+["OTTO","https://www.otto.de/suche/"]
+],
+eu:[
+["Google Shopping","https://www.google.com/search?tbm=shop&q="],
+["Amazon Deutschland","https://www.amazon.de/s?k="],
+["Amazon Frankreich","https://www.amazon.fr/s?k="],
+["Amazon Italien","https://www.amazon.it/s?k="],
+["Amazon Spanien","https://www.amazon.es/s?k="],
+["eBay Deutschland","https://www.ebay.de/sch/i.html?_nkw="],
+["eBay UK","https://www.ebay.co.uk/sch/i.html?_nkw="]
+],
+global:[
+["Google Shopping","https://www.google.com/search?tbm=shop&q="],
+["Amazon USA","https://www.amazon.com/s?k="],
+["eBay Global","https://www.ebay.com/sch/i.html?_nkw="],
+["AliExpress","https://www.aliexpress.com/w/wholesale-"],
+["Walmart","https://www.walmart.com/search?q="],
+["Etsy","https://www.etsy.com/search?q="],
+["Amazon Japan","https://www.amazon.co.jp/s?k="]
+]
+};
+document.getElementById("form").addEventListener("submit",function(e){
+e.preventDefault();
+const q=encodeURIComponent(document.getElementById("query").value.trim());
+const scope=document.getElementById("scope").value;
+const results=document.getElementById("results");
+results.replaceChildren();
+shops[scope].forEach(([name,url])=>{
+const a=document.createElement("a");
+a.className="shop";
+a.href=url+q;
+a.target="_blank";
+a.rel="noopener noreferrer";
+a.textContent=name+" ↗";
+const small=document.createElement("small");
+small.textContent="Angebote beim Anbieter ansehen";
+a.appendChild(small);
+results.appendChild(a);
+});
+});
+</script>
+</body>
+</html>
