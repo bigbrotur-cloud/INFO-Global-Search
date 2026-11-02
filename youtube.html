@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ff791b"><meta name="description" content="Demir INFO YouTube A bis Z: Videos, Kanäle, Podcasts und Bildungsthemen übersichtlich entdecken."><title>YouTube A–Z | Demir INFO</title><style>
+:root{font-family:system-ui,Arial,sans-serif;color:#172941;background:#f5f8fc;font-synthesis:none}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column}
+header{text-align:center;padding:38px 18px 12px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-size:clamp(38px,8vw,62px);letter-spacing:-3px;font-weight:900;color:#ff791b;line-height:1}
+.logo-i{font-family:Georgia,serif;font-style:italic;display:inline-block;animation:rotate-i 12s ease-in-out infinite;transform-origin:50% 50%}
+@keyframes rotate-i{0%,15%,85%,100%{transform:rotateY(0)}50%{transform:rotateY(360deg)}}
+@media(prefers-reduced-motion:reduce){.logo-i{animation:none}}
+main{width:min(100%,960px);margin:0 auto;padding:16px 20px 55px;text-align:center;flex:1}
+h1{font-size:clamp(25px,5vw,36px);margin:20px 0 8px}p{color:#5b6d83} .subtitle{margin:0 0 30px}
+.search{background:#fff;border:1px solid #dbe3ec;border-radius:20px;box-shadow:0 8px 28px #dbe3ed;padding:15px;display:grid;grid-template-columns:minmax(0,1fr) 165px auto;gap:10px;align-items:center}
+input,select{font:inherit;border:1px solid #d7e0e9;border-radius:11px;background:white;padding:15px;min-width:0;width:100%;color:#172941}
+input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #ffb775;outline-offset:3px}
+button{font:inherit;font-weight:750;color:#fff;background:#ed690c;border:0;border-radius:11px;padding:16px 22px;cursor:pointer}
+button:hover{background:#cb5705}
+.note{font-size:13px;text-align:left;margin:14px 4px 0;color:#617088}
+#status{margin-top:30px;text-align:left;font-weight:700;min-height:22px}
+#results{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;text-align:left}
+.shop{display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;background:white;color:#18344d;border:1px solid #dde5ee;border-radius:15px;padding:20px;min-height:125px;box-shadow:0 4px 16px #e5eaf0;transition:transform .15s,border-color .15s}
+.shop:hover{border-color:#ff791b;transform:translateY(-2px)}.shop strong{font-size:17px}.shop span{font-size:13px;color:#62748a;margin-top:12px}
+footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#62748a;font-size:13px}footer a{color:#984400}
+@media(max-width:650px){.search{grid-template-columns:1fr}.search button{width:100%}header{padding-top:28px}main{padding:12px 15px 38px}}
+
+.edu{margin:48px 0 0;text-align:left}.edu h2{font-size:26px;margin-bottom:8px}.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px;margin-top:20px}.edu-item{background:#fff;padding:18px;border:1px solid #dbe3ec;border-radius:15px;text-decoration:none;color:#19314b;display:flex;flex-direction:column;gap:8px}.edu-item:hover{border-color:#ed690c}.edu-item small{color:#52667e;line-height:1.5}.edu-item strong{font-size:17px}
+.consent{position:fixed;z-index:1000;bottom:14px;left:14px;right:14px;max-width:780px;margin:auto;padding:22px;background:white;color:#172941;border:1px solid #bac9d8;border-radius:18px;box-shadow:0 12px 40px #1d335544;text-align:left}.consent h2{margin:0 0 6px}.consent p{margin:7px 0 15px;line-height:1.5}.consent-actions{display:flex;flex-wrap:wrap;gap:9px}.consent-actions button{flex:1;min-width:150px}.consent .secondary{color:#20344b;background:#eef2f7}.consent .secondary:hover{background:#dde6f1}.consent[hidden]{display:none}.consent-options{margin:12px 0;padding:12px;background:#f5f8fc;border-radius:12px}.consent-options label{display:block;margin:7px 0}.consent-options input{width:auto;min-width:0;margin-right:8px}body:has(.consent:not([hidden])){padding-bottom:185px}
+
+/* Alphabet navigation: keep every letter, including Z, within one white surface */
+.category-entry[hidden]{display:none}
+.az-panel{background:#fff;border:1px solid #dbe3ec;border-radius:16px;padding:12px;margin:24px 0;box-shadow:0 4px 16px #e5eaf055}
+.az-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;text-align:left}
+.az-head h2{margin:0;font-size:18px}
+.settings-gear{display:inline-grid;place-items:center;width:30px;height:30px;min-width:30px;padding:0;border-radius:8px;background:#eef2f7;color:#273b52;font-size:16px;line-height:1}
+.settings-gear:hover{background:#dfe8f2}
+.az-letters{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:5px;width:100%;min-width:0}
+.az-letters a{display:grid;place-items:center;min-width:0;min-height:35px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:750;color:#263d55;background:#f3f6fa}
+.az-letters a:hover,.az-letters a:focus-visible{background:#ffe6d6;color:#a34200}
+@media(max-width:650px){.az-panel{padding:10px}.az-letters{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.az-letters a{min-height:34px;font-size:12px}}
+
+
+.youtube-search{display:flex;gap:10px;margin-top:20px}.youtube-search input{flex:1}.youtube-search button{flex:0 0 auto}.yt-filter[aria-current="true"]{background:#ffe3d0;color:#923f00}.yt-actions{margin-top:16px;text-align:left}.yt-actions a{color:#a94d00;font-weight:700}.yt-empty{padding:15px}.yt-letter{color:#e86c16;font-weight:800}.yt-item{min-width:0}.yt-item a{color:#ab4d00;font-weight:700}.yt-item small{display:block}.az-panel a[aria-current="true"]{background:#ffe3d0;color:#923f00}
+@media(max-width:650px){.youtube-search{flex-direction:column}.youtube-search button{width:100%}}
+</style></head>
+<body><header><a href="index.html" class="logo" aria-label="Demir INFO Startseite" style="text-decoration:none"><span class="logo-i" aria-hidden="true">i</span><span>INFO</span></a></header>
+<main><h1>YouTube von A bis Z</h1><p class="subtitle">Entdecke Videos, Kanäle, Dokumentationen und Podcasts – in der gewohnten Demir-INFO-Ansicht.</p>
+<form id="yt-form" class="search youtube-search" role="search"><input id="yt-query" type="search" aria-label="YouTube-Kategorien durchsuchen" placeholder="Astronomie, Podcasts, Mathematik …"><button type="submit">Suchen</button></form>
+<nav class="az-panel" aria-label="YouTube-Kategorien von A bis Z"><div class="az-head"><h2>Von A bis Z</h2><a href="index.html" style="color:#9a4700;font-weight:700">Startseite</a></div><div class="az-letters" id="yt-alphabet"></div></nav>
+<section class="edu" id="kategorien" aria-labelledby="yt-title" style="margin-top:20px"><h2 id="yt-title">YouTube-Kategorien</h2><p id="yt-status" role="status" aria-live="polite">Alle Kategorien</p><div class="edu-grid" id="yt-grid"></div><p class="note">Die Links führen zu passenden YouTube-Suchergebnissen. Sie sind keine redaktionelle Top-10-Rangliste und keine Empfehlung einzelner Kanäle.</p></section>
+</main><footer>Demir INFO · Bit to Qubit · <a href="index.html">Startseite</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>
+<script>"use strict";const data=[["A","Astronomie","Astronomie Weltraum Doku"],["B","Bildung","Bildung Wissen deutsch"],["C","Computer","Computer Programmieren Tutorial deutsch"],["D","Dokumentationen","Dokumentation Geschichte Wissenschaft"],["E","Elektronik","Elektronik Technik Grundlagen"],["F","Forschung","Forschung Wissenschaft Nachrichten"],["G","Geschichte","Geschichte Dokumentationen"],["H","Hörbücher","Hörbuch Literatur kostenlos legal"],["I","Informatik","Informatik KI Software"],["J","Journalismus","Journalismus Recherche Reportage"],["K","Kinderwissen","Kinder Wissenschaft Wissen"],["L","Lernen","Lernvideos Schule Mathematik"],["M","Medizin","Medizin Gesundheitswissen"],["N","Natur","Natur Tiere Dokumentation"],["O","Open Source","Open Source Linux Tutorials"],["P","Podcasts","Podcasts Wissen Interview"],["Q","Quantenphysik","Quantenphysik verständlich"],["R","Robotik","Robotik Forschung Technologie"],["S","Schule","Schule Gymnasium Lernvideos"],["T","Technik","Technik Ingenieurwesen"],["U","Universitäten","Universität Vorlesungen deutsch"],["V","Verbraucherschutz","Verbraucherschutz Tests"],["W","Wissenschaft","Wissenschaft Experimente"],["X","X-Technologien","XR Virtual Reality Technologien"],["Y","Yoga","Yoga Übungen Anfänger"],["Z","Zukunft","Zukunft Technologien Innovation"]];
+const alphabet=document.getElementById("yt-alphabet"),grid=document.getElementById("yt-grid"),query=document.getElementById("yt-query"),status=document.getElementById("yt-status");let letter="";
+function render(){const term=query.value.trim().toLocaleLowerCase("de");const filtered=data.filter(x=>(!letter||x[0]===letter)&&(!term||x.join(" ").toLocaleLowerCase("de").includes(term)));grid.replaceChildren();status.textContent=filtered.length+" Kategorien"+(letter?" mit "+letter:"");for(const x of filtered){const entry=document.createElement("article");entry.className="edu-item yt-item";const l=document.createElement("small");l.className="yt-letter";l.textContent="BUCHSTABE "+x[0];const title=document.createElement("strong");title.textContent=x[1];const detail=document.createElement("small");detail.textContent="Videos und Kanäle zum Thema entdecken";const a=document.createElement("a");a.href="https://www.youtube.com/results?search_query="+encodeURIComponent(x[2]);a.target="_blank";a.rel="noopener noreferrer";a.textContent="Auf YouTube suchen ↗";entry.append(l,title,detail,a);grid.append(entry)}if(!filtered.length){const message=document.createElement("p");message.textContent="Keine Themen gefunden. Bitte anderen Buchstaben oder Suchbegriff wählen.";grid.append(message)}alphabet.querySelectorAll("a").forEach(a=>a.setAttribute("aria-current",String(a.dataset.letter===letter)))}
+for(const l of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){const a=document.createElement("a");a.href="#kategorien";a.dataset.letter=l;a.textContent=l;a.setAttribute("aria-label","YouTube-Kategorien mit "+l);a.addEventListener("click",()=>{letter=letter===l?"":l;render()});alphabet.append(a)}
+document.getElementById("yt-form").addEventListener("submit",e=>{e.preventDefault();letter="";render()});query.addEventListener("input",render);render();
+</script></body></html>
