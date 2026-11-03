@@ -45,6 +45,20 @@ footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#6
 @media(max-width:650px){.az-panel{padding:10px}.az-letters{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.az-letters a{min-height:34px;font-size:12px}}
 
 </style>
+<style>
+/* A–Z vertical navigation: separate from the bookmarks/content, all 26 tiles including Z */
+.az-panel{position:relative}
+.az-letters{display:flex;flex-direction:column;position:fixed;top:8vh;bottom:8vh;left:4px;width:37px;overflow-y:auto;overscroll-behavior:contain;z-index:50;gap:2px;scrollbar-width:thin;padding:2px;background:#fff;border:1px solid #dbe3ec;border-radius:10px}
+.az-letters a{display:flex;align-items:center;justify-content:center;flex:0 0 30px;min-height:30px;background:#f3f6fa;border-radius:6px}
+.az-panel[data-side="right"] .az-letters{left:auto;right:4px}
+.az-panel[data-size="large"] .az-letters{width:46px}
+.az-panel[data-size="large"] .az-letters a{font-size:18px;flex-basis:38px;min-height:38px}
+.settings-gear{border-radius:50%;width:30px;height:30px}
+#az-options[hidden]{display:none}
+#az-options{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px;text-align:left;background:#f5f8fc;border-radius:10px}
+#az-options select{width:auto;padding:8px}
+@media(max-width:650px){.az-letters{width:32px;left:2px}.az-panel[data-side="right"] .az-letters{right:2px}.az-letters a{flex-basis:28px;min-height:28px}}
+</style>
 </head>
 <body>
 <header><div class="logo" aria-label="Demir INFO"><span class="logo-i" aria-hidden="true">i</span><span>INFO</span></div></header>
@@ -115,7 +129,17 @@ const detail=document.createElement("span");detail.textContent="Suchergebnisse b
 a.append(title,detail);results.append(a);
 }
 }
-document.getElementById("az-settings").addEventListener("click",()=>document.getElementById("cookie-settings").click());
+const azSettings=document.getElementById("az-settings");
+const azPanel=document.querySelector(".az-panel");
+azSettings.setAttribute("aria-expanded","false");
+const azOptions=document.createElement("div");
+azOptions.id="az-options";azOptions.hidden=true;
+azOptions.innerHTML='<label for="az-side">A–Z-Leiste</label> <select id="az-side" aria-label="Position der A-bis-Z-Leiste"><option value="left">Links</option><option value="right">Rechts</option></select> <label for="az-size">Schriftgröße</label> <select id="az-size" aria-label="Schriftgröße der A-bis-Z-Leiste"><option value="normal">Normal</option><option value="large">Groß</option></select>';
+azPanel.querySelector(".az-head").after(azOptions);
+azSettings.addEventListener("click",()=>{azOptions.hidden=!azOptions.hidden;azSettings.setAttribute("aria-expanded",String(!azOptions.hidden));});
+function applyAzSettings(){azPanel.dataset.side=document.getElementById("az-side").value;azPanel.dataset.size=document.getElementById("az-size").value;try{localStorage.setItem("demir-az-settings",JSON.stringify({side:azPanel.dataset.side,size:azPanel.dataset.size}));}catch(e){}}
+try{const stored=JSON.parse(localStorage.getItem("demir-az-settings")||"{}");if(["left","right"].includes(stored.side))document.getElementById("az-side").value=stored.side;if(["normal","large"].includes(stored.size))document.getElementById("az-size").value=stored.size;}catch(e){}
+azOptions.querySelectorAll("select").forEach(x=>x.addEventListener("change",applyAzSettings));applyAzSettings();
 document.querySelectorAll(".az-letters a").forEach(a=>a.addEventListener("click",()=>{
 const letter=a.dataset.letter;
 const matches=[...document.querySelectorAll(".category-entry")].filter(item=>item.dataset.initial===letter);
