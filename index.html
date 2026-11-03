@@ -47,6 +47,7 @@ footer{padding:22px 12px;text-align:center;border-top:1px solid #dfe6ee;color:#6
 </style>
 <style>
 /* A–Z vertical navigation: separate from the bookmarks/content, all 26 tiles including Z */
+.az-letters{touch-action:none}
 .az-panel{position:relative}
 .az-letters{display:flex;flex-direction:column;position:fixed;top:8vh;bottom:8vh;left:4px;width:37px;overflow-y:auto;overscroll-behavior:contain;z-index:50;gap:2px;scrollbar-width:thin;padding:2px;background:#fff;border:1px solid #dbe3ec;border-radius:10px}
 .az-letters a{display:flex;align-items:center;justify-content:center;flex:0 0 30px;min-height:30px;background:#f3f6fa;border-radius:6px}
@@ -146,6 +147,22 @@ const matches=[...document.querySelectorAll(".category-entry")].filter(item=>ite
 document.querySelectorAll(".category-entry").forEach(item=>{item.hidden=matches.length>0&&item.dataset.initial!==letter;});
 document.getElementById("category-hint").textContent=matches.length?("Themen mit "+letter):("Für "+letter+" sind noch keine Themen hinterlegt. Alle verfügbaren Themen werden angezeigt.");
 }));
+
+// Touch/drag selection: release on a letter to open it without another tap.
+const azLetters=document.querySelector(".az-letters");
+let azDragging=false,azPointer=null,azLastLetter=null;
+const azBubble=document.createElement("output");
+azBubble.id="az-bubble";azBubble.setAttribute("aria-live","off");azBubble.hidden=true;
+azBubble.style.cssText="position:fixed;top:42%;left:50%;transform:translate(-50%,-50%);z-index:1001;padding:18px 30px;border-radius:22px;background:#ed690c;color:white;font-size:56px;font-weight:900;pointer-events:none;box-shadow:0 8px 24px #0004";
+document.body.append(azBubble);
+function azLetterAt(x,y){const el=document.elementFromPoint(x,y);const a=el&&el.closest(".az-letters a");return a&&azLetters.contains(a)?a:null}
+function azShowLetter(a){if(!a)return;azLastLetter=a;azBubble.value=a.dataset.letter;azBubble.textContent=a.dataset.letter;azBubble.hidden=false}
+azLetters.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;const a=azLetterAt(e.clientX,e.clientY);if(!a)return;azDragging=true;azPointer=e.pointerId;azShowLetter(a);try{azLetters.setPointerCapture(e.pointerId)}catch(_){}e.preventDefault()});
+azLetters.addEventListener("pointermove",e=>{if(!azDragging||e.pointerId!==azPointer)return;const a=azLetterAt(e.clientX,e.clientY);if(a)azShowLetter(a);e.preventDefault()});
+function azEnd(e){if(!azDragging||e.pointerId!==azPointer)return;const target=azLetterAt(e.clientX,e.clientY)||azLastLetter;azDragging=false;azPointer=null;azBubble.hidden=true;if(e.type==="pointerup"&&target){target.click();document.getElementById("kategorien").scrollIntoView({block:"start",behavior:"smooth"})}azLastLetter=null}
+azLetters.addEventListener("pointerup",azEnd);
+azLetters.addEventListener("pointercancel",azEnd);
+
 form.addEventListener("submit",event=>{event.preventDefault();search();});
 const params=new URLSearchParams(location.search),initial=params.get("q"),region=params.get("region");
 if(region&&shops[region])scope.value=region;
