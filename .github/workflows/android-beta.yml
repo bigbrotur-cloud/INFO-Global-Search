@@ -1,0 +1,93 @@
+name: Build Demir INFO Beta APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '.github/workflows/android-beta.yml'
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Generate Android wrapper for existing homepage
+        shell: bash
+        run: |
+          mkdir -p app/src/main/assets app/src/main/java/com/demir/info
+          cp index.html app/src/main/assets/index.html
+          cat > settings.gradle <<'EOF'
+          pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
+          dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }
+          rootProject.name = 'DemirInfo'
+          include ':app'
+          EOF
+          echo "plugins { id 'com.android.application' version '8.7.3' apply false }" > build.gradle
+          cat > app/build.gradle <<'EOF'
+          plugins { id 'com.android.application' }
+          android {
+            namespace 'com.demir.info'
+            compileSdk 35
+            defaultConfig {
+              applicationId 'com.demir.info'
+              minSdk 24
+              targetSdk 35
+              versionCode 91
+              versionName '9.1-beta'
+            }
+          }
+          EOF
+          cat > app/src/main/AndroidManifest.xml <<'EOF'
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <application android:label="Demir INFO Beta" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+              <activity android:name=".MainActivity" android:exported="true">
+                <intent-filter>
+                  <action android:name="android.intent.action.MAIN"/>
+                  <category android:name="android.intent.category.LAUNCHER"/>
+                </intent-filter>
+              </activity>
+            </application>
+          </manifest>
+          EOF
+          cat > app/src/main/java/com/demir/info/MainActivity.java <<'EOF'
+          package com.demir.info;
+          import android.app.Activity;
+          import android.os.Bundle;
+          import android.webkit.WebView;
+          import android.webkit.WebViewClient;
+          import android.webkit.WebChromeClient;
+          public class MainActivity extends Activity {
+            private WebView view;
+            @Override public void onCreate(Bundle state) {
+              super.onCreate(state);
+              view = new WebView(this);
+              view.getSettings().setJavaScriptEnabled(true);
+              view.getSettings().setDomStorageEnabled(true);
+              view.setWebViewClient(new WebViewClient());
+              view.setWebChromeClient(new WebChromeClient());
+              setContentView(view);
+              view.loadUrl("file:///android_asset/index.html");
+            }
+            @Override public void onBackPressed() {
+              if (view.canGoBack()) view.goBack();
+              else super.onBackPressed();
+            }
+          }
+          EOF
+      - name: Build debug APK
+        run: |
+          gradle --version
+          gradle :app:assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Demir-INFO-V9.1-Beta-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
